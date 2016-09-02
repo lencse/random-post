@@ -1,0 +1,6 @@
+/.idea
+/vagrant/mongodb/db/*
+!/vagrant/mongodb/db/.gitkeep
+/.vagrant
+/build
+/vendor/

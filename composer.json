@@ -1,0 +1,24 @@
+{
+    "name": "lencse/random-post",
+    "description": "Random Post Generator",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Levente Loki",
+            "email": "lokilevente@lokilevente.hu"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "./src",
+            "Lencse\\Test\\": "./test/Lencse/Test"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    }
+}
