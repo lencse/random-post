@@ -6,16 +6,20 @@ namespace Lencse\Application;
 class Controller
 {
 
+    /**
+     * @return Response
+     */
     public function showMainPage()
     {
-        echo '<h1>I ❤ Orbán Ráhel</h1>';
+        return new Response('main', 200);
     }
 
+    /**
+     * @return Response
+     */
     public function showNotFoundPage()
     {
-//        header('HTTP/1.1 404 NOT FOUND');
-//        header('Content-Type: text/html; charset=utf-8');
-        echo '<h1>404 NOT FOUND</h1>';
+        return new Response('404', 404  );
     }
 
 }

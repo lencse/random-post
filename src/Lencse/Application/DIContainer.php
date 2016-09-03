@@ -17,6 +17,11 @@ class DIContainer
     private $router;
 
     /**
+     * @var ResponseHandler
+     */
+    private $responseHandler;
+
+    /**
      * @return Router
      */
     public function getRouter()
@@ -26,6 +31,18 @@ class DIContainer
         }
 
         return $this->router;
+    }
+
+    /**
+     * @return ResponseHandler
+     */
+    public function getResponseHandler()
+    {
+        if (!isset($this->responseHandler)) {
+            $this->responseHandler = new ResponseHandler();
+        }
+
+        return $this->responseHandler;
     }
 
     /**

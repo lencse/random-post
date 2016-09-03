@@ -9,17 +9,18 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     public function testShowMainPage()
     {
         $controller = new Controller();
-        ob_start();
-        $controller->showMainPage();
-        $this->assertEquals('<h1>I ❤ Orbán Ráhel</h1>', ob_get_clean());
+        $response = $controller->showMainPage();
+        $this->assertEquals('main', $response->getView());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testShowNotFoundPage()
     {
         $controller = new Controller();
-        ob_start();
+        $response = $controller->showMainPage();
         $controller->showNotFoundPage();
-        $this->assertEquals('<h1>404 NOT FOUND</h1>', ob_get_clean());
+        $this->assertEquals('main', $response->getView());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
 }
