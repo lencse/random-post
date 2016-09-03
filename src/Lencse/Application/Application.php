@@ -3,17 +3,31 @@
 namespace Lencse\Application;
 
 
+use Lencse\DependencyInjection\DIContainer;
+use Lencse\Request\Request;
+
 class Application
 {
 
     /**
+     * @var DIContainer
+     */
+    private $dic;
+
+    /**
+     * @param DIContainer $dic
+     */
+    public function __construct(DIContainer $dic)
+    {
+        $this->dic = $dic;
+    }
+
+    /**
      * @return int
      */
-    public function run()
+    public function run(Request $request)
     {
-        echo '<h1>I ❤ Orbán Ráhel</h1>';
-
-        return 0;
+        return $this->dic->getRouter()->route($request);
     }
 
 }

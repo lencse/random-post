@@ -11,8 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "./src",
-            "Lencse\\Test\\": "./test/Lencse/Test"
+            "": "./src"
         }
     },
     "minimum-stability": "stable",

@@ -2,5 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new \Lencse\Application\Application();
-$app->run();
+$request = \Lencse\Request\Request::createFromGlobals();
+$dic = new \Lencse\DependencyInjection\DIContainer();
+
+$app = new \Lencse\Application\Application($dic);
+$app->run($request);
