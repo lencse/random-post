@@ -1,11 +1,7 @@
 <?php
 
-namespace Lencse\Routing;
+namespace Lencse\Framework;
 
-
-use Lencse\Controller\Controller;
-use Lencse\Request\Request;
-use Lencse\Routing\Router;
 
 class RouterTest extends \PHPUnit_Framework_TestCase
 {

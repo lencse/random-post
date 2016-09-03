@@ -1,10 +1,7 @@
 <?php
 
-namespace Lencse\Routing;
+namespace Lencse\Framework;
 
-
-use Lencse\Controller\Controller;
-use Lencse\Request\Request;
 
 class Router
 {

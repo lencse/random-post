@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Controller;
+namespace Lencse\Framework;
 
 
 class Controller

@@ -1,9 +1,7 @@
 <?php
 
-namespace Lencse\DependencyInjection;
+namespace Lencse\Framework;
 
-
-use Lencse\Routing\Router;
 
 class DIContainerTest extends \PHPUnit_Framework_TestCase
 {

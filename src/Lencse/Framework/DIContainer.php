@@ -1,10 +1,7 @@
 <?php
 
-namespace Lencse\DependencyInjection;
+namespace Lencse\Framework;
 
-
-use Lencse\Controller\Controller;
-use Lencse\Routing\Router;
 
 class DIContainer
 {

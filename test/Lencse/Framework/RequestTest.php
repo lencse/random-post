@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Request;
+namespace Lencse\Framework;
 
 
 class RequestTest extends \PHPUnit_Framework_TestCase
