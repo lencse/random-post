@@ -38,6 +38,7 @@ class Post
     private static $fixtures = [
         ['Magyari Péter', 'Gyurta és Én'],
         ['Bede Márton', 'Tükörtojás'],
+        ['Uj Péter', 'Kádárikum (Egy dinamikusan fejlődő tárház margójára)'],
         ['Vajda Gábor', 'Akarok egy sast'],
         ['Szily László', 'Állatos szex a zánkai strandon'],
         ['Herczeg Márk', 'Egy 40 éves törpe vezetés közben hugyozott, miközben 2000 km-t utazott, hogy megdughasson egy 14 éves lányt'],
