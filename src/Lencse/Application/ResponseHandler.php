@@ -7,12 +7,25 @@ class ResponseHandler
 {
 
     /**
+     * @var Templating
+     */
+    private $templating;
+
+    /**
      * @var string[]
      */
     private $messages = [
         200 => 'OK',
         404 => 'Not Found',
     ];
+
+    /**
+     * @param Templating $templating
+     */
+    public function __construct(Templating $templating)
+    {
+        $this->templating = $templating;
+    }
 
     /**
      * @param Response $response
@@ -25,7 +38,7 @@ class ResponseHandler
             'Content-Type: text/html; charset=utf-8',
         ];
 
-        return new ResponsePresentation($headers, sprintf('<p>View: %s</p>', $response->getView()));
+        return new ResponsePresentation($headers, $this->templating->render($response->getView()));
     }
 
 }

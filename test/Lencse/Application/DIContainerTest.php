@@ -18,4 +18,10 @@ class DIContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResponseHandler::class, $dic->getResponseHandler());
     }
 
+    public function testGetTemplating()
+    {
+        $dic = new DIContainer();
+        $this->assertInstanceOf(Templating::class, $dic->getTemplating());
+    }
+
 }
