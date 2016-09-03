@@ -21,13 +21,13 @@ class Application
 
     /**
      * @param Request $request
-     * @return Response
+     * @return ResponsePresentation
      */
     public function run(Request $request)
     {
         $response =  $this->dic->getRouter()->route($request);
 
-        return $response;
+        return $this->dic->getResponseHandler()->handle($response);
     }
 
 }

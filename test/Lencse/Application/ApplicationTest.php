@@ -12,8 +12,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $request->method('getUri')->willReturn('/');
         $app = new Application(new DIContainer());
         $response = $app->run($request);
-        $this->assertEquals('main', $response->getView());
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertStringStartsWith('<!doctype html>', $response->getHtml());
     }
 
 }
