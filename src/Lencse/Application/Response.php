@@ -17,13 +17,20 @@ class Response
     private $statusCode;
 
     /**
+     * @var ResponseData
+     */
+    private $data;
+
+    /**
      * @param string $view
      * @param int $statusCode
+     * @param ResponseData $data
      */
-    public function __construct($view, $statusCode)
+    public function __construct($view, $statusCode, ResponseData $data = null)
     {
         $this->view = $view;
         $this->statusCode = $statusCode;
+        $this->data = $data;
     }
 
     /**
@@ -40,6 +47,14 @@ class Response
     public function getStatusCode()
     {
         return $this->statusCode;
+    }
+
+    /**
+     * @return ResponseData
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
 }

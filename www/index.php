@@ -5,8 +5,12 @@ namespace Lencse\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$config = require __DIR__ . '/../config-web.php';
+
+
 $request = Request::createFromGlobals();
-$app = new Application(new DIContainer());
+$dic = new DIContainer($config);
+$app = new Application($dic->getRouter(), $dic->getResponseHandler());
 $result = $app->run($request);
 
 foreach ($result->getHeaders() as $header) {

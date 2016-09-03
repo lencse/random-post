@@ -38,7 +38,7 @@ class ResponseHandler
             'Content-Type: text/html; charset=utf-8',
         ];
 
-        return new ResponsePresentation($headers, $this->templating->render($response->getView()));
+        return new ResponsePresentation($headers, $this->templating->render($response->getView(), $response->getData()));
     }
 
 }

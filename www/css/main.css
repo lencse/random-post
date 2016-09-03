@@ -1,0 +1,24 @@
+body {
+    color: #333;
+    font: 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#container {
+    max-width: 800px;
+    margin: 1px auto;
+}
+
+table td, table th {
+    text-align: left;
+    padding: 0.8em;
+    border: 1px solid #333;
+}
+
+table th {
+    background: #8fd8d8;
+}
+
+table  {
+    border-collapse: collapse;
+    width: 100%;
+}

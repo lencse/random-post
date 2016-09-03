@@ -7,16 +7,23 @@ class Application
 {
 
     /**
-     * @var DIContainer
+     * @var Router
      */
-    private $dic;
+    private $router;
 
     /**
-     * @param DIContainer $dic
+     * @var ResponseHandler
      */
-    public function __construct(DIContainer $dic)
+    private $responseHandler;
+
+    /**
+     * @param Router $router
+     * @param ResponseHandler $responseHandler
+     */
+    public function __construct(Router $router, ResponseHandler $responseHandler)
     {
-        $this->dic = $dic;
+        $this->router = $router;
+        $this->responseHandler = $responseHandler;
     }
 
     /**
@@ -25,9 +32,15 @@ class Application
      */
     public function run(Request $request)
     {
-        $response =  $this->dic->getRouter()->route($request);
-
-        return $this->dic->getResponseHandler()->handle($response);
+//        try {
+            $response = $this->router->route($request);
+            return $this->responseHandler->handle($response);
+//        } catch (\Exception $e) {
+//            print_r([
+//                $e->getMessage(),
+//                $e->getTraceAsString()
+//            ]);
+//        }
     }
 
 }

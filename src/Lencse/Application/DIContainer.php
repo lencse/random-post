@@ -7,6 +7,13 @@ class DIContainer
 {
 
     /**
+     * @var array
+     */
+    private $config;
+
+
+
+    /**
      * @var Controller
      */
     private $controller;
@@ -25,6 +32,14 @@ class DIContainer
      * @var Templating
      */
     private $templating;
+
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @return Router
@@ -56,7 +71,7 @@ class DIContainer
     public function getTemplating()
     {
         if (!isset($this->templating)) {
-            $this->templating = new Templating();
+            $this->templating = new Templating($this->config['viewPath']);
         }
 
         return $this->templating;
@@ -68,7 +83,7 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller();
+            $this->controller = new Controller(new DemoPostRepository());
         }
 
         return $this->controller;

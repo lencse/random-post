@@ -8,15 +8,15 @@ class TemplatingTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $templating = new Templating();
-        $html = $templating->render('main');
-        $this->assertContains('View: main', $html);
+        $templating = new Templating(__DIR__ . '/views');
+        $html = $templating->render('main', new ResponseData());
+        $this->assertContains('Posztok', $html);
         $this->assertStringStartsWith('<!doctype html>', $html);
     }
 
     public function testMissingView()
     {
-        $templating = new Templating();
+        $templating = new Templating(__DIR__ . '/views');
         try {
             $templating->render('invalid');
         }
@@ -28,7 +28,7 @@ class TemplatingTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidView()
     {
-        $templating = new Templating();
+        $templating = new Templating(__DIR__ . '/views');
         try {
             $templating->render('invalid/view');
         }
@@ -36,6 +36,13 @@ class TemplatingTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $this->fail('InvalidArgumentException not thrown');
+    }
+
+    public function testEscaping()
+    {
+        ob_start();
+        Templating::esc('&');
+        $this->assertEquals('&amp;', ob_get_clean());
     }
 
 }
