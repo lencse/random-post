@@ -23,7 +23,7 @@ class Application
     }
 
     /**
-     * @return int
+     * @param Request $request
      */
     public function run(Request $request)
     {

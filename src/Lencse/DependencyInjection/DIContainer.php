@@ -31,6 +31,9 @@ class DIContainer
         return $this->router;
     }
 
+    /**
+     * @return Controller
+     */
     private function getController()
     {
         if (!isset($this->controller)) {

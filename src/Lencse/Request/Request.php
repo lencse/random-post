@@ -16,6 +16,7 @@ class Request
     }
 
     /**
+     * @SuppressWarnings(PHPMD.Superglobals)
      * @return Request
      */
     public static function createFromGlobals()
