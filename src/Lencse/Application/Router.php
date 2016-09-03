@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Framework;
+namespace Lencse\Application;
 
 
 class Router

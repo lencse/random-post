@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Framework;
+namespace Lencse\Application;
 
 
 class ControllerTest extends \PHPUnit_Framework_TestCase

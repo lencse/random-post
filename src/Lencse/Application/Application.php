@@ -3,9 +3,6 @@
 namespace Lencse\Application;
 
 
-use Lencse\Framework\DIContainer;
-use Lencse\Framework\Request;
-
 class Application
 {
 
