@@ -47,6 +47,11 @@ class DIContainer
     private $session;
 
     /**
+     * @var MailerInterface
+     */
+    private $mailer;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -108,7 +113,7 @@ class DIContainer
     public function getMessaging()
     {
         if (!isset($this->messaging)) {
-            $this->messaging = new Messaging($this->getSession());
+            $this->messaging = new Messaging($this->getSession(), $this->getMailer(), $this->config['notificationList']);
         }
 
         return $this->messaging;
@@ -131,13 +136,29 @@ class DIContainer
             $dbConf = $this->config['db'];
             if ($dbConf == 'demo') {
                 $this->db = new DemoDB();
-            }
-            elseif (is_array($dbConf['mongo'])) {
+            } elseif (is_array($dbConf['mongo'])) {
                 $this->db = new MongoDB($dbConf['mongo']['connectionString'], $dbConf['mongo']['collection']);
             }
         }
 
         return $this->db;
+    }
+
+    /**
+     * @return MailerInterface
+     */
+    private function getMailer()
+    {
+        if (!isset($this->mailer)) {
+            $mailerConf = $this->config['mailer'];
+            if ($mailerConf == 'dummy') {
+                $this->mailer = new DummyMailer();
+            } elseif (is_array($mailerConf['phpmailer'])) {
+                $this->mailer = new PHPMailerMailer($mailerConf['phpmailer']['gmailUsername'], $mailerConf['phpmailer']['gmailPassword']);
+            }
+        }
+
+        return $this->mailer;
     }
 
     /**
@@ -149,14 +170,12 @@ class DIContainer
             $sessionConf = $this->config['session'];
             if ($sessionConf == 'in-memory') {
                 $this->session = new InMemorySession();
-            }
-            elseif ($sessionConf == 'session') {
+            } elseif ($sessionConf == 'session') {
                 $this->session = new Session();
             }
         }
 
         return $this->session;
     }
-
 
 }

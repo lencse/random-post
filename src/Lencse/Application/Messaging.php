@@ -14,11 +14,25 @@ class Messaging
     private $session;
 
     /**
-     * @param SessionInterface $session
+     * @var MailerInterface
      */
-    public function __construct(SessionInterface $session)
+    private $mailer;
+
+    /**
+     * @var string[]
+     */
+    private $notificationList;
+
+    /**
+     * @param SessionInterface $session
+     * @param MailerInterface $mailer
+     * @param \string[] $notificationList
+     */
+    public function __construct(SessionInterface $session, MailerInterface $mailer, array $notificationList)
     {
         $this->session = $session;
+        $this->mailer = $mailer;
+        $this->notificationList = $notificationList;
     }
 
     /**
@@ -83,27 +97,10 @@ class Messaging
 
     /**
      * @param $exception
-     * @throws \phpmailerException
      */
     private function sendNotificationMails(\Exception $exception)
     {
-        $mail = new \PHPMailer(); // create a new object
-        $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-        $mail->SMTPAuth = true; // authentication enabled
-        $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 587; // or 587
-        $mail->IsHTML(true);
-        $mail->Username = "lencsetest@gmail.com";
-        $mail->Password = "T3stingM4il";
-        $mail->SetFrom("lencsetest@gmail.com");
-        $mail->Subject = mb_encode_mimeheader("Hiba a Random Post alkalmazásban");
-        $mail->Body = $exception->getMessage() . "\n" . $exception->getTraceAsString();
-        $mail->AddAddress("leventeloki@gmail.com");
-        $mail->AddAddress("lokilevente@yahoo.com");
-
-        !$mail->Send();
+        $this->mailer->send($this->notificationList, 'Hiba a Random Post alkalmazásban', $exception->getMessage());
     }
 
 }

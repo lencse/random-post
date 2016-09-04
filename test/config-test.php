@@ -8,4 +8,7 @@ return [
     'viewPath' => APP_ROOT_DIR . '/Lencse/Application/views',
     'db' => 'demo',
     'session' => 'in-memory',
+    'mailer' => 'dummy',
+    'notificationList' => [
+    ],
 ];

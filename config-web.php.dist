@@ -1,0 +1,22 @@
+<?php
+
+return [
+    'viewPath' => __DIR__ . '/views',
+    'db' => [
+        'mongo' => [
+            'connectionString' => 'mongodb://localhost:27017/test',
+            'collection' => 'test.posts',
+        ]
+    ],
+    'session' => 'session',
+    'mailer' => [
+        'phpmailer' => [ // Fill below to send notification mails
+            'gmailUsername' => '',
+            'gmailPassword' => '',
+        ]
+    ],
+    'notificationList' => [
+        'leventeloki@gmail.com',
+        'lokilevente@yahoo.com',
+    ],
+];

@@ -14,8 +14,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $router->method('route')->willReturn(new Response('main', 200));
         $handler = $this->createMock(ResponseHandler::class);
         $handler->method('handle')->willReturn(new ResponsePresentation(['header'], 'html'));
+        $messaging = $this->createMock(Messaging::class);
+        $messaging->method('hasMessage')->willReturn(false);
 
-        $app = new Application($router, $handler, new Messaging(new InMemorySession()));
+        $app = new Application($router, $handler, $messaging);
         $response = $app->run($request);
         $this->assertEquals('html', $response->getHtml());
     }

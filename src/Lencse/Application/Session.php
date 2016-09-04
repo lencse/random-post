@@ -3,6 +3,9 @@
 namespace Lencse\Application;
 
 
+/**
+ * @SuppressWarnings(PHPMD.Superglobals)
+ */
 class Session implements SessionInterface
 {
 
