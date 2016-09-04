@@ -8,23 +8,27 @@ class DIContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRouter()
     {
-        $config = require __DIR__ . '/../../config-test.php';
-        $dic = new DIContainer($config);
+        $dic = new DIContainer($this->getConfig());
         $this->assertInstanceOf(Router::class, $dic->getRouter());
     }
 
     public function testGetResponseHandler()
     {
-        $config = require __DIR__ . '/../../config-test.php';
-        $dic = new DIContainer($config);
+        $dic = new DIContainer($this->getConfig());
         $this->assertInstanceOf(ResponseHandler::class, $dic->getResponseHandler());
     }
 
     public function testGetTemplating()
     {
-        $config = require __DIR__ . '/../../config-test.php';
-        $dic = new DIContainer($config);
+        $dic = new DIContainer($this->getConfig());
         $this->assertInstanceOf(Templating::class, $dic->getTemplating());
     }
 
+    /**
+     * @return array
+     */
+    private function getConfig()
+    {
+        return require __DIR__ . '/../../config-test.php';
+    }
 }

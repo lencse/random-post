@@ -1,6 +1,6 @@
 <?php
 
-define('MIN_COVERAGE', 50);
+define('MIN_COVERAGE', 75);
 
 class CodeCoverageTest extends PHPUnit_Framework_TestCase
 {
