@@ -6,7 +6,7 @@ use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
 
-class MongoDB
+class MongoDB implements DB
 {
 
     /**

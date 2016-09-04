@@ -6,6 +6,5 @@ if (!defined('APP_ROOT_DIR')) {
 
 return [
     'viewPath' => APP_ROOT_DIR . '/Lencse/Application/views',
-    'mongoConnectionString' => 'mongodb://localhost:27017/test',
-    'mongoCollection' => 'test.testposts',
+    'db' => 'demo',
 ];

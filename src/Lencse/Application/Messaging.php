@@ -23,9 +23,17 @@ class Messaging
     }
 
     /**
+     * @return true
+     */
+    public function hasMessage()
+    {
+
+    }
+
+    /**
      * @return Message
      */
-    public function getMessage()
+    public function readAndDeleteMessage()
     {
 
     }

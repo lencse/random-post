@@ -12,25 +12,18 @@ class MongoPostRepository implements PostRepository
     private $db;
 
     /**
-     * @var Post[]
+     * @var Messaging
      */
-    private $posts = [];
+    private $messaging;
 
     /**
-     * @param MongoDB $db
+     * @param DB $db
+     * @param Messaging $messaging
      */
-    public function __construct(MongoDB $db)
+    public function __construct(DB $db, Messaging $messaging)
     {
         $this->db = $db;
-        $queryOptions = [
-            'projection' => ['_id' => 0],
-            'sort' => ['date' => -1],
-        ];
-        foreach ($this->db->query($queryOptions) as $doc) {
-            $date = new \DateTime();
-            $date->setTimestamp($doc->date);
-            $this->posts[] = new Post($doc->author, $doc->title, $date);
-        }
+        $this->messaging = $messaging;
     }
 
     /**
@@ -38,7 +31,18 @@ class MongoPostRepository implements PostRepository
      */
     public function getAll()
     {
-        return $this->posts;
+        $posts = [];
+        $queryOptions = [
+            'projection' => ['_id' => 0],
+            'sort' => ['date' => -1],
+        ];
+        foreach ($this->db->query($queryOptions) as $doc) {
+            $date = new \DateTime();
+            $date->setTimestamp($doc->date);
+            $posts[] = new Post($doc->author, $doc->title, $date);
+        }
+
+        return $posts;
     }
 
     /**
@@ -51,11 +55,7 @@ class MongoPostRepository implements PostRepository
             'title' => $post->getTitle(),
             'date' => $post->getDate()->getTimestamp()
         ]);
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        $_SESSION['post-message'] = sprintf('%s sikeresen mentett egy cikket.', $post->getAuthor());
-        $_SESSION['type'] = 'message';
+        $this->messaging->msg(sprintf('%s sikeresen mentett egy cikket.', $post->getAuthor()));
     }
 
 }

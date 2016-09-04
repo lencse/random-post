@@ -32,9 +32,14 @@ class DIContainer
     private $templating;
 
     /**
-     * @var Message
+     * @var DB
      */
-    private $message;
+    private $db;
+
+    /**
+     * @var Messaging
+     */
+    private $messaging;
 
     /**
      * @param array $config
@@ -86,22 +91,22 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller($this->getMongoPostRepository());
+            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging());
         }
 
         return $this->controller;
     }
 
     /**
-     * @return Message
+     * @return Messaging
      */
-    private function getMessage()
+    private function getMessaging()
     {
-        if (!isset($this->message)) {
-            $this->message= new Message();
+        if (!isset($this->messaging)) {
+            $this->messaging = new Messaging();
         }
 
-        return $this->message;
+        return $this->messaging;
     }
 
     /**
@@ -109,15 +114,25 @@ class DIContainer
      */
     private function getMongoPostRepository()
     {
-        return new RiskyMongoPostRepository($this->getMongoDB());
+        return new RiskyMongoPostRepository($this->getDB(), $this->getMessaging());
     }
 
     /**
-     * @return MongoDB
+     * @return DB
      */
-    private function getMongoDB()
+    private function getDB()
     {
-        return new MongoDB($this->config['mongoConnectionString'], $this->config['mongoCollection']);
+        if (!isset($this->db)) {
+            $dbConf = $this->config['db'];
+            if ($dbConf == 'demo') {
+                $this->db = new DemoDB();
+            }
+            elseif (is_array($dbConf['mongo'])) {
+                $this->db = new MongoDB($dbConf['mongo']['connectionString'], $dbConf['mongo']['collection']);
+            }
+        }
+
+        return $this->db;
     }
 
 }
