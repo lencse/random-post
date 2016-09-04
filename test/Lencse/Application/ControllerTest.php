@@ -8,7 +8,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testShowMainPage()
     {
-        $controller = new Controller(new DemoPostRepository(), new Messaging());
+        $messaging = new Messaging();
+        $controller = new Controller(new PostRepository(new DemoDB(), $messaging), $messaging);
         $response = $controller->showMainPage();
         $this->assertEquals('main', $response->getView());
         $this->assertEquals(200, $response->getStatusCode());
@@ -16,7 +17,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testShowNotFoundPage()
     {
-        $controller = new Controller(new DemoPostRepository(), new Messaging());
+        $messaging = new Messaging();
+        $controller = new Controller(new PostRepository(new DemoDB(), $messaging), $messaging);
         $response = $controller->showMainPage();
         $controller->showNotFoundPage();
         $this->assertEquals('main', $response->getView());

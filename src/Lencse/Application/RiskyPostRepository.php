@@ -3,7 +3,7 @@
 namespace Lencse\Application;
 
 
-class RiskyMongoPostRepository extends MongoPostRepository
+class RiskyPostRepository extends PostRepository
 {
 
     public function save(Post $post)

@@ -110,11 +110,11 @@ class DIContainer
     }
 
     /**
-     * @return MongoPostRepository
+     * @return PostRepository
      */
     private function getMongoPostRepository()
     {
-        return new RiskyMongoPostRepository($this->getDB(), $this->getMessaging());
+        return new RiskyPostRepository($this->getDB(), $this->getMessaging());
     }
 
     /**
