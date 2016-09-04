@@ -1,6 +1,7 @@
 body {
     color: #333;
     font: 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background: #f6f6ff;
 }
 
 #container {
@@ -35,3 +36,18 @@ table tr td:nth-child(2) {
 input[type="submit"] {
     margin: 1em 0 3em;
 }
+
+.msg {
+    padding: 2em;
+    color: #fff;
+    font-weight: bold;
+}
+
+.msg.error {
+    background: #c33;
+}
+
+.msg.message {
+    background: #393;
+}
+

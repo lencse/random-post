@@ -27,6 +27,14 @@ class Controller
         $data = new ResponseData();
         $data->setPosts($this->postRepository->getAll());
 
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        if (isset($_SESSION['post-message'])) {
+            $data->setMessage(new Message($_SESSION['post-message'], $_SESSION['type']));
+            session_unset();
+        }
+
         return new Response('main', 200, $data);
     }
 

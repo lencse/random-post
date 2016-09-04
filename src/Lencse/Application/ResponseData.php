@@ -12,6 +12,11 @@ class ResponseData
     private $posts = [];
 
     /**
+     * @var Message
+     */
+    private $message;
+
+    /**
      * @return Post[]
      */
     public function getPosts()
@@ -25,6 +30,22 @@ class ResponseData
     public function setPosts($posts)
     {
         $this->posts = $posts;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param Message $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 
 }

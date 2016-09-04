@@ -22,14 +22,9 @@ sudo apt-get -y install php5.6-xml
 sudo apt-get -y install php5.6-mbstring
 sudo apt-get -y install php5.6-zip
 sudo apt-get -y install php5.6-xdebug
-#sudo apt-get install -y autoconf g++ make openssl libssl-dev libcurl4-openssl-dev
-#sudo apt-get install -y libcurl4-openssl-dev pkg-config
-#sudo apt-get install -y libsasl2-dev
 sudo apt-get -y install php5.6-mongodb
 
 sudo pecl channel-update pecl.php.net
-
-#sudo pecl install mongodb
 
 sudo cat /shared/vagrant/config/php.ini >> /etc/php/5.6/apache2/php.ini
 sudo cat /shared/vagrant/config/php.ini >> /etc/php/5.6/cli/php.ini

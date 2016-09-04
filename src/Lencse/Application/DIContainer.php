@@ -32,6 +32,11 @@ class DIContainer
     private $templating;
 
     /**
+     * @var Message
+     */
+    private $message;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -88,11 +93,23 @@ class DIContainer
     }
 
     /**
+     * @return Message
+     */
+    private function getMessage()
+    {
+        if (!isset($this->message)) {
+            $this->message= new Message();
+        }
+
+        return $this->message;
+    }
+
+    /**
      * @return MongoPostRepository
      */
     private function getMongoPostRepository()
     {
-        return new MongoPostRepository($this->getMongoDB());
+        return new RiskyMongoPostRepository($this->getMongoDB());
     }
 
     /**

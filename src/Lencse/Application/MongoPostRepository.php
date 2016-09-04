@@ -51,6 +51,11 @@ class MongoPostRepository implements PostRepository
             'title' => $post->getTitle(),
             'date' => $post->getDate()->getTimestamp()
         ]);
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        $_SESSION['post-message'] = sprintf('%s sikeresen mentett egy cikket.', $post->getAuthor());
+        $_SESSION['type'] = 'message';
     }
 
 }
