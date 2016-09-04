@@ -15,4 +15,6 @@ foreach ($result->getHeaders() as $header) {
     header($header);
 }
 
-echo $result->getHtml();
+if ($result->getHtml() !== false) {
+    echo $result->getHtml();
+}

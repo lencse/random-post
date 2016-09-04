@@ -39,7 +39,6 @@ class ResponseHandler
         if ($response->getRedirect()) {
             return new HandledResponse(
                 [
-                    sprintf('HTTP/1.1 %d %s', $response->getStatusCode(), $this->messages[$response->getStatusCode()]),
                     sprintf('Location: %s', $response->getRedirect())
                 ],
                 ''

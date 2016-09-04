@@ -30,7 +30,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $messaging = $this->createMock(MessageWriter::class);
         $app = new Application($router, new ResponseHandler($this->createMock(Templating::class)), $messaging);
         $response = $app->run($request);
-        $this->assertEquals(['HTTP/1.1 500 Internal Server Error', 'Location: /'], $response->getHeaders());
+        $this->assertEquals(['Location: /'], $response->getHeaders());
         $this->assertEquals('', $response->getHtml());
     }
 

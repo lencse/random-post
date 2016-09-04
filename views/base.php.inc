@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Random post generator</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
