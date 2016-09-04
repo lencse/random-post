@@ -38,17 +38,4 @@ sudo apt-get -y install git
 curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get -y install nodejs
-
-sudo npm install -g bower
-sudo npm install -g grunt-cli
-sudo npm install -g pm2
-
-#sudo gem install sass
-#sudo apt-get -y install ruby-compass
-#
-#sudo gem install sass
-#sudo apt-get -y install ruby-compass
-
 sudo apt-get -y install mongodb

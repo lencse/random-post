@@ -16,8 +16,10 @@ class ResponseHandler
      */
     private $messages = [
         200 => 'OK',
+        201 => 'Created',
         404 => 'Not Found',
         400 => 'Bad Request',
+        500 => 'Internal Server Error',
     ];
 
     /**
@@ -35,8 +37,13 @@ class ResponseHandler
     public function handle(Response $response)
     {
         if ($response->getRedirect()) {
-            return new HandledResponse([sprintf('Location: %s', $response->getRedirect())], '');
-
+            return new HandledResponse(
+                [
+                    sprintf('HTTP/1.1 %d %s', $response->getStatusCode(), $this->messages[$response->getStatusCode()]),
+                    sprintf('Location: %s', $response->getRedirect())
+                ],
+                ''
+            );
         }
         return new HandledResponse(
             [

@@ -47,10 +47,11 @@ class Response
     }
 
 
-    public static function redirectResponse($redirectTo)
+    public static function redirectResponse($redirectTo, $statusCode)
     {
         $response = new Response();
         $response->redirect = $redirectTo;
+        $response->statusCode = $statusCode;
 
         return $response;
     }

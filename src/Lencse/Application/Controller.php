@@ -47,7 +47,7 @@ class Controller
     {
         $this->postRepository->save(Post::createRandom());
 
-        return Response::redirectResponse('/');
+        return Response::redirectResponse('/', 201);
     }
 
     /**
