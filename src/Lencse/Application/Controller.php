@@ -12,14 +12,15 @@ class Controller
     private $postRepository;
 
     /**
-     * @var Messaging
+     * @var MessageReader
      */
     private $messaging;
 
     /**
      * @param PostRepository $postRepository
+     * @param MessageReader $messaging
      */
-    public function __construct(PostRepository $postRepository, Messaging $messaging)
+    public function __construct(PostRepository $postRepository, MessageReader $messaging)
     {
         $this->postRepository = $postRepository;
         $this->messaging = $messaging;

@@ -17,16 +17,16 @@ class Application
     private $responseHandler;
 
     /**
-     * @var Messaging
+     * @var MessageWriter
      */
     private $messaging;
 
     /**
      * @param Router $router
      * @param ResponseHandler $responseHandler
-     * @param Messaging $messaging
+     * @param MessageWriter $messaging
      */
-    public function __construct(Router $router, ResponseHandler $responseHandler, Messaging $messaging)
+    public function __construct(Router $router, ResponseHandler $responseHandler, MessageWriter $messaging)
     {
         $this->router = $router;
         $this->responseHandler = $responseHandler;

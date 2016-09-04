@@ -3,7 +3,7 @@
 namespace Lencse\Application;
 
 
-class Messaging
+class Messaging implements MessageWriter, MessageReader
 {
 
     const SESSION_KEY = 'post-message';

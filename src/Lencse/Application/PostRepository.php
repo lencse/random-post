@@ -12,15 +12,15 @@ class PostRepository
     private $db;
 
     /**
-     * @var Messaging
+     * @var MessageWriter
      */
     private $messaging;
 
     /**
      * @param DB $db
-     * @param Messaging $messaging
+     * @param MessageWriter $messaging
      */
-    public function __construct(DB $db, Messaging $messaging)
+    public function __construct(DB $db, MessageWriter $messaging)
     {
         $this->db = $db;
         $this->messaging = $messaging;

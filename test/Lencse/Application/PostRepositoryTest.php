@@ -8,8 +8,7 @@ class PostRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSave()
     {
-        $messaging = $this->createMock(Messaging::class);
-        $messaging->method('hasMessage')->willReturn(false);
+        $messaging = $this->createMock(MessageWriter::class);
         $db = new DemoDB();
         $repo = new PostRepository($db, $messaging);
         $repo->save(new Post('Author', 'Title', new \DateTime()));
