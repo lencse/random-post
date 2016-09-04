@@ -13,7 +13,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $router = $this->createMock(Router::class);
         $router->method('route')->willReturn(Response::htmlResponse('main', 200));
         $handler = $this->createMock(ResponseHandler::class);
-        $handler->method('handle')->willReturn(new ResponsePresentation(['header'], 'html'));
+        $handler->method('handle')->willReturn(new HandledResponse(['header'], 'html'));
         $messaging = $this->createMock(Messaging::class);
         $messaging->method('hasMessage')->willReturn(false);
 

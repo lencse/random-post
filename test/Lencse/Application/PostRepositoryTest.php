@@ -3,7 +3,7 @@
 namespace Lencse\Application;
 
 
-class MongoPostRepositoryTest extends \PHPUnit_Framework_TestCase
+class PostRepositoryTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testSave()

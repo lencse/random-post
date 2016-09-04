@@ -52,6 +52,11 @@ class DIContainer
     private $mailer;
 
     /**
+     * @var PostRepository
+     */
+    private $postRepository;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -124,7 +129,11 @@ class DIContainer
      */
     private function getMongoPostRepository()
     {
-        return new RiskyPostRepository($this->getDB(), $this->getMessaging());
+        if (!isset($this->postRepository)) {
+            $this->postRepository = new RiskyPostRepository($this->getDB(), $this->getMessaging());
+        }
+
+        return $this->postRepository;
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Lencse\Application;
 
 
-class ResponsePresentation
+class HandledResponse
 {
 
     /**

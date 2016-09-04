@@ -30,15 +30,15 @@ class ResponseHandler
 
     /**
      * @param Response $response
-     * @return ResponsePresentation
+     * @return HandledResponse
      */
     public function handle(Response $response)
     {
         if ($response->getRedirect()) {
-            return new ResponsePresentation([sprintf('Location: %s', $response->getRedirect())], '');
+            return new HandledResponse([sprintf('Location: %s', $response->getRedirect())], '');
 
         }
-        return new ResponsePresentation(
+        return new HandledResponse(
             [
                 sprintf('HTTP/1.1 %d %s', $response->getStatusCode(), $this->messages[$response->getStatusCode()]),
                 'Content-Type: text/html; charset=utf-8',

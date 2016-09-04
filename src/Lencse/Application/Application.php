@@ -35,7 +35,7 @@ class Application
 
     /**
      * @param Request $request
-     * @return ResponsePresentation
+     * @return HandledResponse
      */
     public function run(Request $request)
     {
