@@ -14,4 +14,12 @@ class ResponseDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($posts, $data->getPosts());
     }
 
+    public function testMessage()
+    {
+        $data = new ResponseData();
+        $message = new Message('Message', 'Type');
+        $data->setMessage($message);
+        $this->assertEquals($message, $data->getMessage());
+    }
+
 }

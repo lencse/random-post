@@ -15,7 +15,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $handler = $this->createMock(ResponseHandler::class);
         $handler->method('handle')->willReturn(new ResponsePresentation(['header'], 'html'));
 
-        $app = new Application($router, $handler);
+        $app = new Application($router, $handler, new Messaging(new InMemorySession()));
         $response = $app->run($request);
         $this->assertEquals('html', $response->getHtml());
     }

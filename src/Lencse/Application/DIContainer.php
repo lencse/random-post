@@ -42,6 +42,11 @@ class DIContainer
     private $messaging;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -100,10 +105,10 @@ class DIContainer
     /**
      * @return Messaging
      */
-    private function getMessaging()
+    public function getMessaging()
     {
         if (!isset($this->messaging)) {
-            $this->messaging = new Messaging();
+            $this->messaging = new Messaging($this->getSession());
         }
 
         return $this->messaging;
@@ -134,5 +139,24 @@ class DIContainer
 
         return $this->db;
     }
+
+    /**
+     * @return SessionInterface
+     */
+    private function getSession()
+    {
+        if (!isset($this->session)) {
+            $sessionConf = $this->config['session'];
+            if ($sessionConf == 'in-memory') {
+                $this->session = new InMemorySession();
+            }
+            elseif ($sessionConf == 'session') {
+                $this->session = new Session();
+            }
+        }
+
+        return $this->session;
+    }
+
 
 }

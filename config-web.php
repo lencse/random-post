@@ -9,5 +9,6 @@ return [
             'connectionString' => 'mongodb://localhost:27017/test',
             'collection' => 'test.posts',
         ]
-    ]
+    ],
+    'session' => 'session',
 ];

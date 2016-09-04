@@ -7,4 +7,5 @@ if (!defined('APP_ROOT_DIR')) {
 return [
     'viewPath' => APP_ROOT_DIR . '/Lencse/Application/views',
     'db' => 'demo',
+    'session' => 'in-memory',
 ];
