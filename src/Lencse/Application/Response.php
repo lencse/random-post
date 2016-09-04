@@ -22,15 +22,37 @@ class Response
     private $data;
 
     /**
-     * @param string $view
-     * @param int $statusCode
-     * @param ResponseData $data
+     * @var string
      */
-    public function __construct($view, $statusCode, ResponseData $data = null)
+    private $redirect = null;
+
+    private function __construct()
     {
-        $this->view = $view;
-        $this->statusCode = $statusCode;
-        $this->data = $data;
+    }
+
+    /**
+     * @param $view
+     * @param $statusCode
+     * @param ResponseData $data
+     * @return Response
+     */
+    public static function htmlResponse($view, $statusCode, ResponseData $data = null)
+    {
+        $response = new Response();
+        $response->view = $view;
+        $response->statusCode = $statusCode;
+        $response->data = $data;
+
+        return $response;
+    }
+
+
+    public static function redirectResponse($redirectTo)
+    {
+        $response = new Response();
+        $response->redirect = $redirectTo;
+
+        return $response;
     }
 
     /**
@@ -55,6 +77,14 @@ class Response
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirect()
+    {
+        return $this->redirect;
     }
 
 }

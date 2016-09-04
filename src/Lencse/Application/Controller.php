@@ -36,7 +36,7 @@ class Controller
             $data->setMessage($this->messaging->readAndDeleteMessage());
         }
 
-        return new Response('main', 200, $data);
+        return Response::htmlResponse('main', 200, $data);
     }
 
     /**
@@ -45,7 +45,8 @@ class Controller
     public function createNewPost()
     {
         $this->postRepository->save(Post::createRandom());
-        header('Location: /');
+
+        return Response::redirectResponse('/');
     }
 
     /**
@@ -53,7 +54,7 @@ class Controller
      */
     public function showNotFoundPage()
     {
-        return new Response('404', 404);
+        return Response::htmlResponse('404', 404);
     }
 
     /**
@@ -61,7 +62,7 @@ class Controller
      */
     public function showBadRequestPage()
     {
-        return new Response('400', 400);
+        return Response::htmlResponse('400', 400);
     }
 
 }

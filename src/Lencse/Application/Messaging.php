@@ -52,8 +52,6 @@ class Messaging
         $this->saveErrorMessageToSession($exception);
         $this->saveErrorMessageToSyslog($exception);
         $this->sendNotificationMails($exception);
-
-
     }
 
     /**

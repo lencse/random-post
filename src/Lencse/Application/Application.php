@@ -44,7 +44,7 @@ class Application
             return $this->responseHandler->handle($response);
         } catch (\Exception $e) {
             $this->messaging->error($e);
-            header('Location: /');
+            return $this->responseHandler->handle(Response::redirectResponse('/'));
         }
     }
 

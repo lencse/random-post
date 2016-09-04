@@ -6,8 +6,6 @@ namespace Lencse\Application;
 class Message
 {
 
-
-
     /**
      * @var string
      */

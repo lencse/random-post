@@ -17,6 +17,7 @@ class ResponseHandler
     private $messages = [
         200 => 'OK',
         404 => 'Not Found',
+        400 => 'Bad Request',
     ];
 
     /**
@@ -33,13 +34,15 @@ class ResponseHandler
      */
     public function handle(Response $response)
     {
-        $headers = [
-            sprintf('HTTP/1.1 %d %s', $response->getStatusCode(), $this->messages[$response->getStatusCode()]),
-            'Content-Type: text/html; charset=utf-8',
-        ];
+        if ($response->getRedirect()) {
+            return new ResponsePresentation([sprintf('Location: %s', $response->getRedirect())], '');
 
+        }
         return new ResponsePresentation(
-            $headers,
+            [
+                sprintf('HTTP/1.1 %d %s', $response->getStatusCode(), $this->messages[$response->getStatusCode()]),
+                'Content-Type: text/html; charset=utf-8',
+            ],
             $this->templating->render($response->getView(), $response->getData())
         );
     }
