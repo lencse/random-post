@@ -1,5 +1,9 @@
-<?php /** @var \Lencse\Application\ResponseData $data */?>
+<?php /** @var \Lencse\Application\ResponseData $data */ ?>
 <h1>Posztok</h1>
+
+<form action="/new" method="post">
+    <input type="submit" value="Új bejegyzés">
+</form>
 
 <table>
     <tr>

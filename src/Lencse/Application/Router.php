@@ -25,7 +25,16 @@ class Router
     public function route(Request $request)
     {
         if ($request->getUri() == '/') {
-            return $this->controller->showMainPage();
+            if ($request->getMethod() == 'GET') {
+                return $this->controller->showMainPage();
+            }
+            return $this->controller->showBadRequestPage();
+        }
+        if ($request->getUri() == '/new') {
+            if ($request->getMethod() == 'POST') {
+                return $this->controller->createNewPost();
+            }
+            return $this->controller->showBadRequestPage();
         }
 
         return $this->controller->showNotFoundPage();

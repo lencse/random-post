@@ -5,16 +5,17 @@ body {
 
 #container {
     max-width: 1000px;
-    margin: 1px auto;
+    margin: 2em auto 4em;
 }
 
-table td, table th {
+table td, table th, input[type="submit"] {
+    border: 1px solid #333;
     text-align: left;
     padding: 0.8em;
-    border: 1px solid #333;
 }
 
-table th {
+
+table th, input[type="submit"] {
     background: #8fd8d8;
 }
 
@@ -31,3 +32,6 @@ table tr td:nth-child(2) {
     width: 15%;
 }
 
+input[type="submit"] {
+    margin: 1em 0 3em;
+}

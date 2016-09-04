@@ -12,6 +12,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $controller->method('showMainPage')->willReturn(1);
         $request = $this->createMock(Request::class);
         $request->method('getUri')->willReturn('/');
+        $request->method('getMethod')->willReturn('GET');
         $router = new Router($controller);
         $this->assertEquals(1, $router->route($request));
     }
@@ -22,6 +23,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $controller->method('showNotFoundPage')->willReturn(404);
         $request = $this->createMock(Request::class);
         $request->method('getUri')->willReturn('/non-existent');
+        $request->method('getMethod')->willReturn('GET');
         $router = new Router($controller);
         $this->assertEquals(404, $router->route($request));
     }
