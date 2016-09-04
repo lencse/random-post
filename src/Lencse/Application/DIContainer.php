@@ -11,8 +11,6 @@ class DIContainer
      */
     private $config;
 
-
-
     /**
      * @var Controller
      */
@@ -83,10 +81,26 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller(new DemoPostRepository());
+            $this->controller = new Controller($this->getMongoPostRepository());
         }
 
         return $this->controller;
+    }
+
+    /**
+     * @return MongoPostRepository
+     */
+    private function getMongoPostRepository()
+    {
+        return new MongoPostRepository($this->getMongoDB());
+    }
+
+    /**
+     * @return MongoDB
+     */
+    private function getMongoDB()
+    {
+        return new MongoDB($this->config['mongoConnectionString'], $this->config['mongoCollection']);
     }
 
 }

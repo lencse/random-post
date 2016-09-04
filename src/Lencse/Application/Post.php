@@ -22,14 +22,15 @@ class Post
     private $date;
 
     /**
-     * @param string $author
-     * @param string $title
+     * @param $author
+     * @param $title
+     * @param \DateTime $date
      */
-    public function __construct($author, $title)
+    public function __construct($author, $title, \DateTime $date)
     {
         $this->author = $author;
         $this->title = $title;
-        $this->date = new \DateTime();
+        $this->date = $date;
     }
 
     /**
@@ -53,7 +54,7 @@ class Post
         $idx = array_rand(self::$fixtures);
         $fixture = self::$fixtures[$idx];
 
-        return new Post($fixture[0], $fixture[1]);
+        return new Post($fixture[0], $fixture[1], new \DateTime());
     }
 
     /**

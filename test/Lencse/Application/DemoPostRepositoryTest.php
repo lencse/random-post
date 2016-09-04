@@ -15,7 +15,7 @@ class DemoPostRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $repo = new DemoPostRepository();
-        $repo->save(new Post('Author', 'Title'));
+        $repo->save(new Post('Author', 'Title', new \DateTime()));
         $this->assertEquals(11, count($repo->getAll()));
     }
 

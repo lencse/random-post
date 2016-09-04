@@ -4,7 +4,7 @@ body {
 }
 
 #container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 1px auto;
 }
 
@@ -18,7 +18,16 @@ table th {
     background: #8fd8d8;
 }
 
-table  {
+table {
     border-collapse: collapse;
     width: 100%;
 }
+
+table tr td:nth-child(1) {
+    width: 15%;
+}
+
+table tr td:nth-child(2) {
+    width: 15%;
+}
+
