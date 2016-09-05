@@ -25,7 +25,6 @@
         "setup": [
             "echo \"db.posts.ensureIndex({date: -1})\" | mongo",
             "cp config-web.php.dist config-web.php",
-            "echo \"Don't forget to edit config-web.php for settings!\""
         ],
         "test": [
             "vendor/bin/phpunit"

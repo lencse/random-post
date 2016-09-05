@@ -43,4 +43,7 @@ sudo apt-get -y install mongodb
 sudo apt-get -y install ssmtp
 sudo apt-get -y install heirloom-mailx
 
+sudo apt-get -y install dos2unix
+
+dos2unix /shared/vagrant/config/ssmtp.conf
 sudo cat /shared/vagrant/config/ssmtp.conf >> /etc/ssmtp/ssmtp.conf
