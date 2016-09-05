@@ -1,5 +1,7 @@
 # Random post generator
 
+[![Build Status](https://travis-ci.org/lencse/random-post.svg?branch=master)](https://travis-ci.org/lencse/random-post)
+
 ### Installation with vagrant
 
 1. Clone and enter project dir
@@ -16,5 +18,3 @@ composer setup
 ````
 
 ### Open [http://localhost:8444](http://localhost:8444)
-
-[![Build Status](https://travis-ci.org/lencse/random-post.svg?branch=master)](https://travis-ci.org/lencse/random-post)

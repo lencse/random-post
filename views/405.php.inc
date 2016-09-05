@@ -1,0 +1,1 @@
+<h1 class="msg error">405 Method Not Allowed :(</h1>

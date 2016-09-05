@@ -10,7 +10,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $controller = $this->createController();
         $response = $controller->showMainPage();
-        $this->assertEquals('main', $response->getView());
+        $this->assertInstanceOf(HtmlResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -18,7 +18,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $controller = $this->createController();
         $response = $controller->showNotFoundPage();
-        $this->assertEquals('404', $response->getView());
+        $this->assertInstanceOf(HtmlResponse::class, $response);
         $this->assertEquals(404, $response->getStatusCode());
     }
 
@@ -26,8 +26,16 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $controller = $this->createController();
         $response = $controller->showBadRequestPage();
-        $this->assertEquals('400', $response->getView());
+        $this->assertInstanceOf(HtmlResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
+    }
+
+    public function testShowNotAllowedPage()
+    {
+        $controller = $this->createController();
+        $response = $controller->showNotAllowedPage();
+        $this->assertInstanceOf(HtmlResponse::class, $response);
+        $this->assertEquals(405, $response->getStatusCode());
     }
 
     public function testCreateNewPost()
@@ -39,7 +47,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $request = $this->createMock(Request::class);
         $request->method('getPostValues')->willReturn(['csrfToken' => 'RANDOM']);
         $response = $controller->createNewPost($request);
-        $this->assertEquals('/', $response->getRedirect());
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+        $this->assertEquals('/', $response->getRedirectTo());
     }
 
     public function testCreateNewPostWithBadCsrf()
@@ -51,6 +60,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $request = $this->createMock(Request::class);
         $request->method('getPostValues')->willReturn(['csrfToken' => 'RANDOM']);
         $response = $controller->createNewPost($request);
+        $this->assertInstanceOf(HtmlResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
     }
 
@@ -68,7 +78,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             $security = $this->createMock(Security::class);
             $security->method('getCsrfToken')->willReturn('RANDOM');
         }
-        $controller = new Controller($postRepository, $reader, $security);
+        $templating = $this->createMock(Templating::class);
+        $controller = new Controller($postRepository, $reader, $security, $templating);
         return $controller;
     }
 

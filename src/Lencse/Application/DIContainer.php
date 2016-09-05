@@ -22,11 +22,6 @@ class DIContainer
     private $router;
 
     /**
-     * @var ResponseHandler
-     */
-    private $responseHandler;
-
-    /**
      * @var Templating
      */
     private $templating;
@@ -82,18 +77,6 @@ class DIContainer
     }
 
     /**
-     * @return ResponseHandler
-     */
-    public function getResponseHandler()
-    {
-        if (!isset($this->responseHandler)) {
-            $this->responseHandler = new ResponseHandler($this->getTemplating());
-        }
-
-        return $this->responseHandler;
-    }
-
-    /**
      * @return Templating
      */
     public function getTemplating()
@@ -111,7 +94,7 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging(), $this->getSecurity());
+            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging(), $this->getSecurity(), $this->getTemplating());
         }
 
         return $this->controller;

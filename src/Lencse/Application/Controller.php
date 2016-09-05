@@ -22,15 +22,22 @@ class Controller
     private $security;
 
     /**
+     * @var Templating
+     */
+    private $templating;
+
+    /**
      * @param PostRepository $postRepository
      * @param MessageReader $messaging
      * @param Security $security
+     * @param Templating $templating
      */
-    public function __construct(PostRepository $postRepository, MessageReader $messaging, Security $security)
+    public function __construct(PostRepository $postRepository, MessageReader $messaging, Security $security, Templating $templating)
     {
         $this->postRepository = $postRepository;
         $this->messaging = $messaging;
         $this->security = $security;
+        $this->templating = $templating;
     }
 
     /**
@@ -45,7 +52,7 @@ class Controller
         }
         $data->setCsrfToken($this->security->getCsrfToken());
 
-        return Response::htmlResponse('main', 200, $data);
+        return new HtmlResponse(200, $this->templating->render('main', $data));
     }
 
     /**
@@ -59,7 +66,7 @@ class Controller
         }
         $this->postRepository->save(Post::createRandom());
 
-        return Response::redirectResponse('/', 201);
+        return new RedirectResponse('/');
     }
 
     /**
@@ -67,7 +74,7 @@ class Controller
      */
     public function showNotFoundPage()
     {
-        return Response::htmlResponse('404', 404);
+        return new HtmlResponse(404, $this->templating->render('404'));
     }
 
     /**
@@ -75,7 +82,15 @@ class Controller
      */
     public function showBadRequestPage()
     {
-        return Response::htmlResponse('400', 400);
+        return new HtmlResponse(400, $this->templating->render('400'));
+    }
+
+    /**
+     * @return Response
+     */
+    public function showNotAllowedPage()
+    {
+        return new HtmlResponse(405, $this->templating->render('405'));
     }
 
 }

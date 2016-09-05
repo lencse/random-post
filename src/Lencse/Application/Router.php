@@ -28,13 +28,13 @@ class Router
             if ($request->getMethod() == 'GET') {
                 return $this->controller->showMainPage();
             }
-            return $this->controller->showBadRequestPage();
+            return $this->controller->showNotAllowedPage();
         }
         if ($request->getUri() == '/new') {
             if ($request->getMethod() == 'POST') {
                 return $this->controller->createNewPost($request);
             }
-            return $this->controller->showBadRequestPage();
+            return $this->controller->showNotAllowedPage();
         }
 
         return $this->controller->showNotFoundPage();

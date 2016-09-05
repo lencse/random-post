@@ -8,13 +8,7 @@ $config = require __DIR__ . '/../config-web.php';
 
 $request = Request::createFromGlobals();
 $dic = new DIContainer($config);
-$app = new Application($dic->getRouter(), $dic->getResponseHandler(), $dic->getMessaging());
+$app = new Application($dic->getRouter(), $dic->getMessaging());
 $result = $app->run($request);
 
-foreach ($result->getHeaders() as $header) {
-    header($header);
-}
-
-if ($result->getHtml() !== false) {
-    echo $result->getHtml();
-}
+$result->send();

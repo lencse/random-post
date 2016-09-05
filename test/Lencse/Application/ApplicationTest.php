@@ -10,14 +10,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $request = $this->getRequest();
         $router = $this->createMock(Router::class);
-        $router->method('route')->willReturn(Response::htmlResponse('main', 200));
-        $handler = $this->createMock(ResponseHandler::class);
-        $handler->method('handle')->willReturn(new HandledResponse(['header'], 'html'));
+        $response = new HtmlResponse(200, 'html');
+        $router->method('route')->willReturn($response);
         $messaging = $this->createMock(MessageWriter::class);
 
-        $app = new Application($router, $handler, $messaging);
-        $response = $app->run($request);
-        $this->assertEquals('html', $response->getHtml());
+        $app = new Application($router, $messaging);
+        $this->assertEquals($response, $response = $app->run($request));
     }
 
     public function testError()
@@ -26,10 +24,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $router = $this->createMock(Router::class);
         $router->method('route')->willThrowException(new \Exception('Test Exception'));
         $messaging = $this->createMock(MessageWriter::class);
-        $app = new Application($router, new ResponseHandler($this->createMock(Templating::class)), $messaging);
-        $response = $app->run($request);
-        $this->assertEquals(['Location: /'], $response->getHeaders());
-        $this->assertEquals('', $response->getHtml());
+        $app = new Application($router, $messaging);
+        $this->assertInstanceOf(RedirectResponse::class, $app->run($request));
     }
 
     /**

@@ -42,23 +42,23 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testBadRequestForMainPage()
     {
         $controller = $this->createMock(Controller::class);
-        $controller->method('showBadRequestPage')->willReturn(400);
+        $controller->method('showNotAllowedPage')->willReturn(405);
         $request = $this->createMock(Request::class);
         $request->method('getUri')->willReturn('/');
         $request->method('getMethod')->willReturn('POST');
         $router = new Router($controller);
-        $this->assertEquals(400, $router->route($request));
+        $this->assertEquals(405, $router->route($request));
     }
 
     public function testBadRequestForNewPost()
     {
         $controller = $this->createMock(Controller::class);
-        $controller->method('showBadRequestPage')->willReturn(400);
+        $controller->method('showNotAllowedPage')->willReturn(405);
         $request = $this->createMock(Request::class);
         $request->method('getUri')->willReturn('/new');
         $request->method('getMethod')->willReturn('GET');
         $router = new Router($controller);
-        $this->assertEquals(400, $router->route($request));
+        $this->assertEquals(405, $router->route($request));
     }
 
 }
