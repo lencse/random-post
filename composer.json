@@ -24,7 +24,7 @@
     "scripts": {
         "setup": [
             "echo \"db.posts.ensureIndex({date: -1})\" | mongo",
-            "cp config-web.php.dist config-web.php",
+            "cp config-web.php.dist config-web.php"
         ],
         "test": [
             "vendor/bin/phpunit"
