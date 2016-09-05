@@ -94,7 +94,7 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging(), $this->getSecurity(), $this->getTemplating());
+            $this->controller = new Controller($this->getPostRepository(), $this->getMessaging(), $this->getSecurity(), $this->getTemplating());
         }
 
         return $this->controller;
@@ -115,10 +115,15 @@ class DIContainer
     /**
      * @return PostRepository
      */
-    private function getMongoPostRepository()
+    private function getPostRepository()
     {
         if (!isset($this->postRepository)) {
-            $this->postRepository = new RiskyPostRepository($this->getDB(), $this->getMessaging());
+            if ($this->config['postRepository'] == 'risky' && rand(0, 1) == 1) {
+                $this->postRepository = new FailingPostRepository($this->getDB(), $this->getMessaging());
+            }
+            else {
+                $this->postRepository = new PostRepository($this->getDB(), $this->getMessaging());
+            }
         }
 
         return $this->postRepository;

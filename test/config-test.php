@@ -11,4 +11,5 @@ return [
     'mailer' => 'dummy',
     'notificationList' => [
     ],
+    'postRepository' => 'working',
 ];
