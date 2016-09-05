@@ -9,12 +9,7 @@ return [
         ]
     ],
     'session' => 'session',
-    'mailer' => [
-        'phpmailer' => [ // Fill below to send notification mails
-            'gmailUsername' => '',
-            'gmailPassword' => '',
-        ]
-    ],
+    'mailer' => 'simplephpmailer',
     'notificationList' => [
         'leventeloki@gmail.com',
         'lokilevente@yahoo.com',

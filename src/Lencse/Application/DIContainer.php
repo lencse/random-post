@@ -179,8 +179,8 @@ class DIContainer
             $mailerConf = $this->config['mailer'];
             if ($mailerConf == 'dummy') {
                 $this->mailer = new DummyMailer();
-            } elseif (is_array($mailerConf['phpmailer'])) {
-                $this->mailer = new PHPMailerMailer($mailerConf['phpmailer']['gmailUsername'], $mailerConf['phpmailer']['gmailPassword']);
+            } elseif ($mailerConf == 'simplephpmailer') {
+                $this->mailer = new SimplePHPMailer();
             }
         }
 

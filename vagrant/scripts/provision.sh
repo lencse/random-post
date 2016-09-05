@@ -39,3 +39,8 @@ curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
 sudo apt-get -y install mongodb
+
+sudo apt-get -y install ssmtp
+sudo apt-get -y install heirloom-mailx
+
+sudo cat /shared/vagrant/config/ssmtp.conf >> /etc/ssmtp/ssmtp.conf
