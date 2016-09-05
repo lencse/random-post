@@ -17,6 +17,11 @@ class ResponseData
     private $message;
 
     /**
+     * @var string
+     */
+    private $csrfToken;
+
+    /**
      * @return Post[]
      */
     public function getPosts()
@@ -46,6 +51,22 @@ class ResponseData
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCsrfToken()
+    {
+        return $this->csrfToken;
+    }
+
+    /**
+     * @param string $csrfToken
+     */
+    public function setCsrfToken($csrfToken)
+    {
+        $this->csrfToken = $csrfToken;
     }
 
 }

@@ -17,13 +17,20 @@ class Controller
     private $messaging;
 
     /**
+     * @var Security
+     */
+    private $security;
+
+    /**
      * @param PostRepository $postRepository
      * @param MessageReader $messaging
+     * @param Security $security
      */
-    public function __construct(PostRepository $postRepository, MessageReader $messaging)
+    public function __construct(PostRepository $postRepository, MessageReader $messaging, Security $security)
     {
         $this->postRepository = $postRepository;
         $this->messaging = $messaging;
+        $this->security = $security;
     }
 
     /**
@@ -36,15 +43,20 @@ class Controller
         if ($this->messaging->hasMessage()) {
             $data->setMessage($this->messaging->readAndDeleteMessage());
         }
+        $data->setCsrfToken($this->security->getCsrfToken());
 
         return Response::htmlResponse('main', 200, $data);
     }
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function createNewPost()
+    public function createNewPost(Request $request)
     {
+        if (!$this->security->validateCsrfToken($request->getPostValues()['csrfToken'])) {
+            return $this->showBadRequestPage();
+        }
         $this->postRepository->save(Post::createRandom());
 
         return Response::redirectResponse('/', 201);

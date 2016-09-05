@@ -8,6 +8,7 @@
 <?php endif ?>
 
 <form action="/new" method="post">
+    <input type="hidden" name="csrfToken" value="<?php self::esc($data->getCsrfToken()); ?>">
     <input type="submit" value="Új bejegyzés">
 </form>
 

@@ -22,4 +22,11 @@ class ResponseDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($message, $data->getMessage());
     }
 
+    public function testCsrfToken()
+    {
+        $data = new ResponseData();
+        $data->setCsrfToken('TOKEN');
+        $this->assertEquals('TOKEN', $data->getCsrfToken());
+    }
+
 }

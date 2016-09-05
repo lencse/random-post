@@ -57,6 +57,11 @@ class DIContainer
     private $postRepository;
 
     /**
+     * @var Security
+     */
+    private $security;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -106,7 +111,7 @@ class DIContainer
     private function getController()
     {
         if (!isset($this->controller)) {
-            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging());
+            $this->controller = new Controller($this->getMongoPostRepository(), $this->getMessaging(), $this->getSecurity());
         }
 
         return $this->controller;
@@ -134,6 +139,18 @@ class DIContainer
         }
 
         return $this->postRepository;
+    }
+
+    /**
+     * @return Security
+     */
+    private function getSecurity()
+    {
+        if (!isset($this->security)) {
+            $this->security = new Security($this->getSession());
+        }
+
+        return $this->security;
     }
 
     /**

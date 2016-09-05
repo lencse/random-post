@@ -1,1 +1,1 @@
-<h1>400 Bad Request :(</h1>
+<h1 class="msg error"400 Bad Request :(</h1>

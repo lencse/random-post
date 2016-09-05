@@ -32,7 +32,7 @@ class Router
         }
         if ($request->getUri() == '/new') {
             if ($request->getMethod() == 'POST') {
-                return $this->controller->createNewPost();
+                return $this->controller->createNewPost($request);
             }
             return $this->controller->showBadRequestPage();
         }

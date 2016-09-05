@@ -16,6 +16,11 @@ class Request
      */
     private $method;
 
+    /**
+     * @var array
+     */
+    private $postValues;
+
     private function __construct()
     {
     }
@@ -29,6 +34,7 @@ class Request
         $request = new Request();
         $request->uri = $_SERVER['REQUEST_URI'];
         $request->method = $_SERVER['REQUEST_METHOD'];
+        $request->postValues = $_POST;
 
         return $request;
     }
@@ -47,6 +53,14 @@ class Request
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPostValues()
+    {
+        return $this->postValues;
     }
 
 }
