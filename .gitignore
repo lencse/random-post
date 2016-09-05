@@ -3,3 +3,4 @@
 /build
 /vendor/
 /config-web.php
+/vagrant/config/ssmtp.conf

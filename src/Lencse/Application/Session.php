@@ -48,7 +48,7 @@ class Session implements SessionInterface
      */
     public function unsetField($key)
     {
-        unset($_SESSION['$key']);
+        unset($_SESSION[$key]);
     }
 
 

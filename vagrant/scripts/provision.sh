@@ -47,3 +47,11 @@ sudo apt-get -y install dos2unix
 
 dos2unix /shared/vagrant/config/ssmtp.conf
 sudo cat /shared/vagrant/config/ssmtp.conf >> /etc/ssmtp/ssmtp.conf
+
+
+CRON="*/5 * * * * php /shared/bin/process-mail.php ; echo \"db.mails.remove()\" | mongo"
+
+sudo crontab -l > mycron
+echo "$CRON" >> mycron
+sudo crontab mycron
+rm mycron

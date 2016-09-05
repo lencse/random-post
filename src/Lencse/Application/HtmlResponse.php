@@ -37,11 +37,31 @@ class HtmlResponse implements Response
         $this->html = $html;
     }
 
-    public function send()
+    /**
+     * @return string
+     */
+    public function getHeaders()
     {
-        header(sprintf('HTTP/1.1 %d %s', $this->statusCode, self::$messages[$this->statusCode]));
-        header('Content-Type: text/html; charset=utf-8');
-        echo $this->html;
+        return [
+            sprintf('HTTP/1.1 %d %s', $this->statusCode, self::$messages[$this->statusCode]),
+            'Content-Type: text/html; charset=utf-8',
+        ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOutput()
+    {
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutput()
+    {
+        return $this->html;
     }
 
     /**

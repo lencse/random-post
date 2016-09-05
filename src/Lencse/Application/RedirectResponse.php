@@ -19,9 +19,28 @@ class RedirectResponse implements Response
         $this->redirectTo = $redirectTo;
     }
 
-    public function send()
+    /**
+     * @return string
+     */
+    public function getHeaders()
     {
-        header(sprintf('Location: %s', $this->redirectTo));
+        return [sprintf('Location: %s', $this->redirectTo)];
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOutput()
+    {
+        return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutput()
+    {
+        throw new \RuntimeException('No output for redirect response');
     }
 
     /**

@@ -4,11 +4,9 @@
 
 ### Installation with vagrant
 
-1. Clone and enter project dir
-1. Edit vagrant/config/ssmtp.conf to add Gmail user (without `@gmail.com``) and password to send notification mails
-1. Execute the following commands:
-
 ````
+cp vagrant/config/ssmtp.conf.dist vagrant/config/ssmtp.conf
+# Add Gmail username and password to vagrant/config/ssmtp.conf
 vagrant up
 vagrant ssh
 cd /shared

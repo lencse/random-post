@@ -6,6 +6,19 @@ namespace Lencse\Application;
 interface Response
 {
 
-    public function send();
+    /**
+     * @return string
+     */
+    public function getHeaders();
+
+    /**
+     * @return bool
+     */
+    public function hasOutput();
+
+    /**
+     * @return string
+     */
+    public function getOutput();
 
 }

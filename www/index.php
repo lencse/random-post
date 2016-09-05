@@ -1,7 +1,7 @@
 <?php
 
-
 namespace Lencse\Application;
+
 
 require_once __DIR__ . '/../vendor/autoload.php';
 $config = require __DIR__ . '/../config-web.php';
@@ -9,6 +9,12 @@ $config = require __DIR__ . '/../config-web.php';
 $request = Request::createFromGlobals();
 $dic = new DIContainer($config);
 $app = new Application($dic->getRouter(), $dic->getMessaging());
-$result = $app->run($request);
+$response = $app->run($request);
 
-$result->send();
+foreach ($response->getHeaders() as $header) {
+    header($header);
+}
+
+if ($response->hasOutput()) {
+    echo $response->getOutput();
+}

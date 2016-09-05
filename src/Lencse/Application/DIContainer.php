@@ -29,7 +29,12 @@ class DIContainer
     /**
      * @var DB
      */
-    private $db;
+    private $postDb;
+
+    /**
+     * @var DB
+     */
+    private $mailDb;
 
     /**
      * @var Messaging
@@ -57,11 +62,28 @@ class DIContainer
     private $security;
 
     /**
+     * @var MailProcesser
+     */
+    private $mailProcesser;
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @return MailProcesser
+     */
+    public function getMailProcesser()
+    {
+        if (!isset($this->mailProcesser)) {
+            $this->mailProcesser = new MailProcesser($this->getMailer(), $this->getMailDb());
+        }
+
+        return $this->mailProcesser;
     }
 
     /**
@@ -79,7 +101,7 @@ class DIContainer
     /**
      * @return Templating
      */
-    public function getTemplating()
+    private function getTemplating()
     {
         if (!isset($this->templating)) {
             $this->templating = new Templating($this->config['viewPath']);
@@ -106,7 +128,7 @@ class DIContainer
     public function getMessaging()
     {
         if (!isset($this->messaging)) {
-            $this->messaging = new Messaging($this->getSession(), $this->getMailer(), $this->config['notificationList']);
+            $this->messaging = new Messaging($this->getSession(), $this->getMailDb(), $this->config['notificationList']);
         }
 
         return $this->messaging;
@@ -119,10 +141,10 @@ class DIContainer
     {
         if (!isset($this->postRepository)) {
             if ($this->config['postRepository'] == 'risky' && rand(0, 1) == 1) {
-                $this->postRepository = new FailingPostRepository($this->getDB(), $this->getMessaging());
+                $this->postRepository = new FailingPostRepository($this->getPostDb(), $this->getMessaging());
             }
             else {
-                $this->postRepository = new PostRepository($this->getDB(), $this->getMessaging());
+                $this->postRepository = new PostRepository($this->getPostDb(), $this->getMessaging());
             }
         }
 
@@ -144,18 +166,35 @@ class DIContainer
     /**
      * @return DB
      */
-    private function getDB()
+    private function getPostDb()
     {
-        if (!isset($this->db)) {
-            $dbConf = $this->config['db'];
+        if (!isset($this->postDb)) {
+            $dbConf = $this->config['postDb'];
             if ($dbConf == 'demo') {
-                $this->db = new DemoDB();
+                $this->postDb = new DemoDB();
             } elseif (is_array($dbConf['mongo'])) {
-                $this->db = new MongoDB($dbConf['mongo']['connectionString'], $dbConf['mongo']['collection']);
+                $this->postDb = new MongoDB($dbConf['mongo']['connectionString'], $dbConf['mongo']['collection']);
             }
         }
 
-        return $this->db;
+        return $this->postDb;
+    }
+
+    /**
+     * @return DB
+     */
+    private function getMailDb()
+    {
+        if (!isset($this->mailDb)) {
+            $dbConf = $this->config['mailDb'];
+            if ($dbConf == 'demo') {
+                $this->mailDb = new DemoDB();
+            } elseif (is_array($dbConf['mongo'])) {
+                $this->mailDb = new MongoDB($dbConf['mongo']['connectionString'], $dbConf['mongo']['collection']);
+            }
+        }
+
+        return $this->mailDb;
     }
 
     /**

@@ -24,7 +24,19 @@ class MessagingTest extends \PHPUnit_Framework_TestCase
         $message = $msg->readAndDeleteMessage();
         $this->assertEquals('test', $message->getMessage());
         $this->assertEquals('error', $message->getType());
+    }
 
+    public function testException()
+    {
+        $session = new InMemorySession();
+        $session->set(Messaging::SESSION_KEY, 'ERROR');
+        $messaging = new Messaging($session, new DemoDB(), ['test@test.hu']);
+        try {
+            $messaging->readAndDeleteMessage();
+        } catch (\RuntimeException $e) {
+            return;
+        }
+        $this->fail('RuntimeException not thrown');
     }
 
     /**
@@ -32,7 +44,7 @@ class MessagingTest extends \PHPUnit_Framework_TestCase
      */
     private function createMessaging()
     {
-        return new Messaging(new InMemorySession(), new DummyMailer(), ['test@test.hu']);
+        return new Messaging(new InMemorySession(), new DemoDB(), ['test@test.hu']);
     }
 
 }

@@ -19,10 +19,6 @@ class InMemorySession implements SessionInterface
 
     public function get($key)
     {
-        if (!$this->has($key)) {
-            throw new \InvalidArgumentException('Key "%s" ot found in session', $key);
-        }
-
         return $this->data[$key];
     }
 

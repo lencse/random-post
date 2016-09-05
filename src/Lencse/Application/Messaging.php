@@ -14,9 +14,9 @@ class Messaging implements MessageWriter, MessageReader
     private $session;
 
     /**
-     * @var MailerInterface
+     * @var DB
      */
-    private $mailer;
+    private $db;
 
     /**
      * @var string[]
@@ -25,13 +25,13 @@ class Messaging implements MessageWriter, MessageReader
 
     /**
      * @param SessionInterface $session
-     * @param MailerInterface $mailer
+     * @param DB $db
      * @param \string[] $notificationList
      */
-    public function __construct(SessionInterface $session, MailerInterface $mailer, array $notificationList)
+    public function __construct(SessionInterface $session, DB $db, array $notificationList)
     {
         $this->session = $session;
-        $this->mailer = $mailer;
+        $this->db = $db;
         $this->notificationList = $notificationList;
     }
 
@@ -98,7 +98,11 @@ class Messaging implements MessageWriter, MessageReader
      */
     private function sendNotificationMails(\Exception $exception)
     {
-        $this->mailer->send($this->notificationList, 'Hiba a Random Post alkalmazásban', $exception->getMessage());
+        $this->db->insert([
+            'emails' => $this->notificationList,
+            'subject' => 'Hiba a Random Post alkalmazásban',
+            'body' => $exception->getMessage(),
+        ]);
     }
 
 }

@@ -12,10 +12,16 @@ class DIContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Router::class, $dic->getRouter());
     }
 
-    public function testGetTemplating()
+    public function testGetMessaging()
     {
         $dic = new DIContainer($this->getConfig());
-        $this->assertInstanceOf(Templating::class, $dic->getTemplating());
+        $this->assertInstanceOf(Messaging::class, $dic->getMessaging());
+    }
+
+    public function testGetMailProcesser()
+    {
+        $dic = new DIContainer($this->getConfig());
+        $this->assertInstanceOf(MailProcesser::class, $dic->getMailProcesser());
     }
 
     /**

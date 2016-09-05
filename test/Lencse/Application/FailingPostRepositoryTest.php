@@ -10,7 +10,7 @@ class FailingPostRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $repo = new FailingPostRepository(new DemoDB(), $this->createMock(Messaging::class));
         try {
-            $repo->save();
+            $repo->save(new Post('Author', 'Title', new \DateTime()));
         }
         catch (\Exception $e) {
             return;

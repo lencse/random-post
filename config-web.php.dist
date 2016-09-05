@@ -2,10 +2,16 @@
 
 return [
     'viewPath' => __DIR__ . '/views',
-    'db' => [
+    'postDb' => [
         'mongo' => [
             'connectionString' => 'mongodb://localhost:27017/test',
             'collection' => 'test.posts',
+        ]
+    ],
+    'mailDb' => [
+        'mongo' => [
+            'connectionString' => 'mongodb://localhost:27017/test',
+            'collection' => 'test.mails',
         ]
     ],
     'session' => 'session',
