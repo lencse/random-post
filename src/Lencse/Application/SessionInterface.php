@@ -24,6 +24,9 @@ interface SessionInterface
      */
     public function set($key, $value);
 
-    public function clear();
+    /**
+     * @param $key string
+     */
+    public function unsetField($key);
 
 }

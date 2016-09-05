@@ -35,9 +35,13 @@ class InMemorySession implements SessionInterface
         $this->data[$key] = $value;
     }
 
-    public function clear()
+    /**
+     * @param $key string
+     */
+    public function unsetField($key)
     {
-        $this->data = [];
+        unset($this->data[$key]);
     }
+
 
 }

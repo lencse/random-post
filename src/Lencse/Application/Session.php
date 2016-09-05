@@ -43,9 +43,13 @@ class Session implements SessionInterface
         $_SESSION[$key] = $value;
     }
 
-    public function clear()
+    /**
+     * @param $key string
+     */
+    public function unsetField($key)
     {
-        session_unset();
+        unset($_SESSION['$key']);
     }
+
 
 }

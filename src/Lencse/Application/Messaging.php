@@ -71,7 +71,7 @@ class Messaging implements MessageWriter, MessageReader
         if (!$msg instanceof Message) {
             throw new \RuntimeException('Something bad happened');
         }
-        $this->session->clear();
+        $this->session->unsetField(self::SESSION_KEY);
 
         return $msg;
     }
