@@ -8,7 +8,7 @@ class TemplatingTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $templating = new Templating(__DIR__ . '/views');
+        $templating = new Templating(__DIR__ . '/../../../views');
         $html = $templating->render('main', new ResponseData());
         $this->assertContains('Posztok', $html);
         $this->assertStringStartsWith('<!doctype html>', $html);

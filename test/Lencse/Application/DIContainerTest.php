@@ -2,7 +2,9 @@
 
 namespace Lencse\Application;
 
-
+/**
+ * @group integration
+ */
 class DIContainerTest extends \PHPUnit_Framework_TestCase
 {
 

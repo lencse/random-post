@@ -137,7 +137,7 @@ class DIContainer
     /**
      * @return PostRepository
      */
-    private function getPostRepository()
+    public function getPostRepository()
     {
         if (!isset($this->postRepository)) {
             if ($this->config['postRepository'] == 'risky' && rand(0, 1) == 1) {
@@ -217,7 +217,7 @@ class DIContainer
     /**
      * @return SessionInterface
      */
-    private function getSession()
+    public function getSession()
     {
         if (!isset($this->session)) {
             $sessionConf = $this->config['session'];
